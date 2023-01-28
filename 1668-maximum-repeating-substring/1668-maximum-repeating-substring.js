@@ -6,7 +6,7 @@
 var maxRepeating = function(sequence, word) {
   const reg = new RegExp('(' + word + ')\\1*', 'g')
   let max = 0;
-  for (let i = 0; i < sequence.length; i++) {
+  for (let i = 0; i <= sequence.length - word.length; i++) {
     const matches = sequence.slice(i).match(reg);
     if (!matches) {
       continue;
