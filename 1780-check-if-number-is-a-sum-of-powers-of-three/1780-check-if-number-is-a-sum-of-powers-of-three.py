@@ -5,5 +5,4 @@ class Solution:
       if n / a >= 2:
         return False
       n -= a
-    print(n)
     return n == 0
