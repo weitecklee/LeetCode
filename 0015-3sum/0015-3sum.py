@@ -12,7 +12,7 @@ class Solution:
         if sum == 0:
           ans.append([nums[i], nums[j], nums[k]])
           j += 1
-          while j < len(nums) - 1 and nums[j] == nums[j - 1]:
+          while j < k and nums[j] == nums[j - 1]:
             j += 1
         elif sum < 0:
           j += 1
