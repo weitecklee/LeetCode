@@ -23,10 +23,7 @@ var areSentencesSimilar = function(sentence1, sentence2, similarPairs) {
     if (sentence1[i] === sentence2[i]) {
       continue;
     }
-    if (!pairs.has(sentence1[i]) || !pairs.has(sentence2[i])) {
-      return false;
-    }
-    if (!pairs.get(sentence1[i]).has(sentence2[i])) {
+    if (!pairs.has(sentence1[i]) || !pairs.has(sentence2[i]) || !pairs.get(sentence1[i]).has(sentence2[i])) {
       return false;
     }
   }
