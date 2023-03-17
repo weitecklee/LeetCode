@@ -1,58 +1,37 @@
+from collections import defaultdict
 
-var Trie = function() {
-  this.map = new Map();
-  this.isWord = false;
-};
+class Trie:
 
-/** 
- * @param {string} word
- * @return {void}
- */
-Trie.prototype.insert = function(word) {
-  let trie = this;
-  for (const c of word) {
-    if (!trie.map.has(c)) {
-      trie.map.set(c, new Trie());
-    }
-    trie = trie.map.get(c);
-  }
-  trie.isWord = true;
-};
+    def __init__(self):
+      self.dict = defaultdict(lambda: Trie())
+      self.isWord = False
 
-/** 
- * @param {string} word
- * @return {boolean}
- */
-Trie.prototype.search = function(word) {
-  let trie = this;
-  for (const c of word) {
-    if (!trie.map.has(c)) {
-      return false;
-    }
-    trie = trie.map.get(c);
-  }
-  return trie.isWord;
-};
+    def insert(self, word: str) -> None:
+      trie = self
+      for c in word:
+        trie = trie.dict[c]
+      trie.isWord = True
 
-/** 
- * @param {string} prefix
- * @return {boolean}
- */
-Trie.prototype.startsWith = function(prefix) {
-  let trie = this;
-  for (const c of prefix) {
-    if (!trie.map.has(c)) {
-      return false;
-    }
-    trie = trie.map.get(c);
-  }
-  return true;
-};
+    def search(self, word: str) -> bool:
+      trie = self
+      for c in word:
+        if c not in trie.dict:
+          return False
+        trie = trie.dict[c]
+      return trie.isWord
 
-/** 
- * Your Trie object will be instantiated and called as such:
- * var obj = new Trie()
- * obj.insert(word)
- * var param_2 = obj.search(word)
- * var param_3 = obj.startsWith(prefix)
- */
+    def startsWith(self, prefix: str) -> bool:
+      trie = self
+      for c in prefix:
+        if c not in trie.dict:
+          return False
+        trie = trie.dict[c]
+      return True
+        
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
