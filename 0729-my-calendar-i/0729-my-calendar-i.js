@@ -15,7 +15,6 @@ MyCalendar.prototype.book = function(start, end) {
     }
   }
   this.events.push([start, end])
-  this.events.sort((a, b) => a[0] - b[0]);
   return true;
 };
 
