@@ -4,19 +4,14 @@ class Solution:
         potions.sort()
         n = len(potions)
         for spell in spells:
-          if (potions[0] * spell) >= success:
-            pairs.append(n)
-          elif (potions[-1] * spell) < success:
-            pairs.append(0);
-          else:
-            left = 0
-            right = n - 1
-            while left < right:
-              mid = left + (right - left) // 2
-              check = spell * potions[mid]
-              if check < success:
-                left = mid + 1
-              else:
-                right = mid
-            pairs.append(n - left)
+          left = 0
+          right = n - 1
+          while left <= right:
+            mid = left + (right - left) // 2
+            check = spell * potions[mid]
+            if check < success:
+              left = mid + 1
+            else:
+              right = mid - 1
+          pairs.append(n - left)
         return pairs
