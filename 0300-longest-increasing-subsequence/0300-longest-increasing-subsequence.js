@@ -32,4 +32,5 @@ var lengthOfLIS = function(nums) {
     }
   }
   return arr.length;
+  
 };
