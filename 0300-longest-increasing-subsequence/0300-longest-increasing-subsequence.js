@@ -3,28 +3,33 @@
  * @return {number}
  */
 var lengthOfLIS = function(nums) {
-    const arr = [nums[0]];
-
-    const binarySearch = (arr, target) => {
-        let left = 0;
-        let right = arr.length - 1;
-
-        while (left <= right) {
-            const mid = Math.floor((left + right) / 2);
-            if (arr[mid] === target) return mid;
-            if (arr[mid] < target) left = mid + 1;
-            else right = mid - 1;
-        }
-        return left;  // Return the insertion point
-    };
-
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] > arr[arr.length - 1]) {
-            arr.push(nums[i]);
-        } else {
-            const idx = binarySearch(arr, nums[i]);
-            arr[idx] = nums[i];  // Replace the element at the found index
-        }
+  if (nums.length === 0) {
+    return 0;
+  }
+  const arr = [];
+  const binarySearch = (k) => {
+    let lo = 0;
+    let hi = arr.length - 1;
+    while (lo <= hi) {
+      const mid = Math.floor((lo + hi) / 2);
+      if (arr[mid] === k) {
+        return mid;
+      }
+      if (arr[mid] < k) {
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
     }
-    return arr.length;
+    return lo;
+  }
+  for (const n of nums) {
+    const i = binarySearch(n);
+    if (i >= arr.length) {
+      arr.push(n);
+    } else {
+      arr[i] = n;
+    }
+  }
+  return arr.length;
 };
